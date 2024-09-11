@@ -1,22 +1,23 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rpp/core/common/text_form_field.dart';
+import 'package:rpp/features/auth/presentation/view_model/auth_view_model.dart';
 import 'package:rpp/features/auth/presentation/widgets/facebook_custom_widget.dart';
 import 'package:rpp/features/auth/presentation/widgets/google_custom_widget.dart';
 import 'package:rpp/features/auth/presentation/widgets/login_animations.dart';
 import 'package:rpp/features/language/easy_localization_delegate.dart';
 import 'package:rpp/features/language/easy_localization_provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginView extends ConsumerStatefulWidget {
+  const LoginView({super.key});
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _LoginViewState();
 }
 
-/// Component Widget this layout UI
-class _LoginScreenState extends State<LoginScreen>
+class _LoginViewState extends ConsumerState<LoginView>
     with TickerProviderStateMixin {
   //Animation Declaration
   late AnimationController sanimationController;
@@ -58,12 +59,16 @@ class _LoginScreenState extends State<LoginScreen>
   /// Component Widget layout UI
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authViewModelProvider);
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     mediaQueryData.devicePixelRatio;
     mediaQueryData.size.width;
     mediaQueryData.size.height;
 
     var data = EasyLocalizationProvider.of(context)!.data;
+
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
 
     return EasyLocalizationProvider(
       data: data,
@@ -163,6 +168,7 @@ class _LoginScreenState extends State<LoginScreen>
                                 email:
                                     AppLocalizations.of(context)!.tr('email'),
                                 inputType: TextInputType.emailAddress,
+                                controller: emailController,
                               ),
 
                               /// TextFromField Password
@@ -174,6 +180,7 @@ class _LoginScreenState extends State<LoginScreen>
                                 email: AppLocalizations.of(context)!
                                     .tr('password'),
                                 inputType: TextInputType.text,
+                                controller: passwordController,
                               ),
 
                               /// Button Signup

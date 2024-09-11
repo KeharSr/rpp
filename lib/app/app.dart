@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:rpp/app/navigator_key/navigator_key.dart';
 import 'package:rpp/features/auth/presentation/view/login_view.dart';
 import 'package:rpp/features/language/easy_localization_delegate.dart';
 import 'package:rpp/features/language/easy_localization_provider.dart';
@@ -25,7 +26,7 @@ class App extends StatelessWidget {
     return EasyLocalizationProvider(
       data: data,
       child: MaterialApp(
-        title: "Treva Shop",
+        title: "RPP",
         theme: ThemeData(
             buttonTheme: const ButtonThemeData(buttonColor: Colors.white),
             brightness: Brightness.light,
@@ -33,6 +34,7 @@ class App extends StatelessWidget {
             primaryColor: Colors.white),
         debugShowCheckedModeBanner: false,
         home: const LoginScreen(),
+        navigatorKey: AppNavigator.navigatorKey,
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

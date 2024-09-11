@@ -5,9 +5,10 @@ class TextFromField extends StatelessWidget {
   String? email;
   IconData? icon;
   TextInputType? inputType;
+  TextEditingController? controller;
 
   TextFromField(
-      {super.key, this.email, this.icon, this.inputType, this.password});
+      {super.key, this.email, this.icon, this.inputType, this.password,this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,7 @@ class TextFromField extends StatelessWidget {
           ),
           child: TextFormField(
             obscureText: password!,
+            controller: controller,
             decoration: InputDecoration(
                 border: InputBorder.none,
                 labelText: email,

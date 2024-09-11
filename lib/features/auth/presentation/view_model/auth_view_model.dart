@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rpp/core/common/my_snackbar.dart';
 import 'package:rpp/features/auth/domain/usecase/auth_usecase.dart';
@@ -12,18 +13,17 @@ class AuthViewModel extends StateNotifier<AuthState> {
 
   final AuthUsecase authUsecase;
 
-  Future<void> login(String email, String password) async {
+  Future<void> login({required String email, required String password}) async {
     state = state.copyWith(isLoading: true);
 
     final result = await authUsecase.login(email: email, password: password);
 
-    result.fold(
-      (failure) {
-        state = state.copyWith(isLoading: false, error: failure.error);
-        showMySnackBar(message: failure.error);
-      },
-      (success) =>
-          state = state.copyWith(isLoading: false, isLoginSuccess: true),
-    );
+    result.fold((failure) {
+      state = state.copyWith(isLoading: false, error: failure.error);
+      showMySnackBar(message: failure.error, color: Colors.red);
+    }, (success) {
+      state = state.copyWith(isLoading: false, isLoginSuccess: true);
+      showMySnackBar(message: 'Login Successful', color: Colors.green);
+    });
   }
 }

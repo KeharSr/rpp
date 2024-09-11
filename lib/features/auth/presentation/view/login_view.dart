@@ -1,12 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rpp/core/common/button.dart';
 import 'package:rpp/core/common/text_form_field.dart';
 import 'package:rpp/features/auth/presentation/view_model/auth_view_model.dart';
-import 'package:rpp/features/auth/presentation/widgets/facebook_custom_widget.dart';
-import 'package:rpp/features/auth/presentation/widgets/google_custom_widget.dart';
-import 'package:rpp/features/auth/presentation/widgets/login_animations.dart';
 import 'package:rpp/features/language/easy_localization_delegate.dart';
 import 'package:rpp/features/language/easy_localization_provider.dart';
 
@@ -14,266 +10,273 @@ class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LoginViewState();
+  ConsumerState<LoginView> createState() => _LoginViewState();
 }
 
-class _LoginViewState extends ConsumerState<LoginView>
-    with TickerProviderStateMixin {
-  //Animation Declaration
-  late AnimationController sanimationController;
+class _LoginViewState extends ConsumerState<LoginView> {
+  bool _obscureText = true;
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController =
+      TextEditingController(text: "keharojha56@gmail.com");
+  final TextEditingController _passwordController =
+      TextEditingController(text: "password");
 
-  var tap = 0;
-
-  @override
-
-  /// set state animation controller
-  void initState() {
-    sanimationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 800))
-      ..addStatusListener((statuss) {
-        if (statuss == AnimationStatus.dismissed) {
-          setState(() {
-            tap = 0;
-          });
-        }
-      });
-    // TODO: implement initState
-    super.initState();
-  }
-
-  /// Dispose animation controller
-  @override
-  void dispose() {
-    sanimationController.dispose();
-    super.dispose();
-  }
-
-  /// Playanimation set forward reverse
-  Future<Null> _PlayAnimation() async {
-    try {
-      await sanimationController.forward();
-      await sanimationController.reverse();
-    } on TickerCanceled {}
-  }
-
-  /// Component Widget layout UI
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authViewModelProvider);
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    mediaQueryData.devicePixelRatio;
-    mediaQueryData.size.width;
-    mediaQueryData.size.height;
-
     var data = EasyLocalizationProvider.of(context)!.data;
 
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
-
     return EasyLocalizationProvider(
-      data: data,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Container(
-          /// Set Background image in layout (Click to open code)
+        data: data,
+        child: Scaffold(
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  top: 56, left: 24, right: 24, bottom: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image(
+                        height: 150,
+                        image: AssetImage("assets/images/applogo.png"),
+                      ),
+                      Text(
+                        'Welcome back,',
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontFamily: "Poppins",
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        "Discover Limitless Choices with lensify",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 10),
+                    ],
+                  ),
+                  Form(
+                    key: _formKey,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: Column(
+                        children: [
+                          MyTextFormField(
+                            controller: _emailController,
+                            labelText:
+                                AppLocalizations.of(context)!.tr('email'),
+                            prefixIcon: Icons.email_outlined,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Enter your email';
+                              }
+                              if (!value.contains('@')) {
+                                return 'Enter a valid email';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          MyTextFormField(
+                            controller: _passwordController,
+                            labelText:
+                                AppLocalizations.of(context)!.tr('password'),
+                            prefixIcon: Icons.password_rounded,
+                            obscureText: _obscureText,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Enter your password';
+                              }
+                              if (value.length < 6) {
+                                return 'Password must be at least 6 characters';
+                              }
 
-          child: Container(
-            /// Set gradient color in image (Click to open code)
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color.fromRGBO(0, 0, 0, 0.0),
-                  Color.fromRGBO(0, 0, 0, 0.3)
-                ],
-                begin: FractionalOffset.topCenter,
-                end: FractionalOffset.bottomCenter,
-              ),
-            ),
-
-            /// Set component layout
-            child: ListView(
-              children: <Widget>[
-                Stack(
-                  alignment: AlignmentDirectional.bottomCenter,
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Container(
-                          alignment: AlignmentDirectional.topCenter,
-                          child: Column(
-                            children: <Widget>[
-                              /// padding logo
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                      top: mediaQueryData.padding.top + 40.0)),
+                              return null;
+                            },
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _obscureText = !_obscureText;
+                                });
+                              },
+                              child: Icon(
+                                _obscureText
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  const Image(
-                                    image: AssetImage("assets/img/Logo.png"),
-                                    height: 70.0,
+                                children: [
+                                  SizedBox(
+                                    width: 24,
+                                    height: 24,
+                                    child: Checkbox(
+                                      value: true,
+                                      onChanged: (value) {},
+                                    ),
                                   ),
-                                  const Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 10.0)),
-
-                                  /// Animation text treva shop accept from signup layout (Click to open code)
-                                  Hero(
-                                    tag: "Treva",
-                                    child: Text(
-                                      AppLocalizations.of(context)!.tr('title'),
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.w900,
-                                          letterSpacing: 0.6,
-                                          color: Colors.white,
-                                          fontFamily: "Sans",
-                                          fontSize: 20.0),
+                                  const SizedBox(width: 19),
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .tr('rememberMe'),
+                                    style: const TextStyle(
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ],
                               ),
-
-                              /// ButtonCustomFacebook
-                              const Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(vertical: 30.0)),
-                              const ButtonCustomFacebook(),
-
-                              /// ButtonCustomGoogle
-                              const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 7.0)),
-                              const ButtonCustomGoogle(),
-
-                              /// Set Text
-                              const Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(vertical: 10.0)),
-                              Text(
-                                AppLocalizations.of(context)!.tr('or'),
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    color: Colors.white,
-                                    letterSpacing: 0.2,
-                                    fontFamily: 'Sans',
-                                    fontSize: 17.0),
+                              TextButton(
+                                onPressed: () {},
+                                child: Text(AppLocalizations.of(context)!
+                                    .tr('forgotPassword')),
                               ),
-
-                              /// TextFromField Email
-                              const Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(vertical: 10.0)),
-                              TextFromField(
-                                icon: Icons.email,
-                                password: false,
-                                email:
-                                    AppLocalizations.of(context)!.tr('email'),
-                                inputType: TextInputType.emailAddress,
-                                controller: emailController,
-                              ),
-
-                              /// TextFromField Password
-                              const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 5.0)),
-                              TextFromField(
-                                icon: Icons.vpn_key,
-                                password: true,
-                                email: AppLocalizations.of(context)!
-                                    .tr('password'),
-                                inputType: TextInputType.text,
-                                controller: passwordController,
-                              ),
-
-                              /// Button Signup
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20.0),
-                                child: InkWell(
-                                    onTap: () {
-                                      // Navigator.of(context).pushReplacement(
-                                      //     MaterialPageRoute(
-                                      //         builder: (BuildContext context) =>
-                                      //             Signup()));
-                                    },
-                                    child: Text(
-                                      AppLocalizations.of(context)!
-                                          .tr('notHave'),
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 13.0,
-                                          fontWeight: FontWeight.w600,
-                                          fontFamily: "Sans"),
-                                    )),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: mediaQueryData.padding.top + 100.0,
-                                    bottom: 0.0),
-                              )
                             ],
+                          ),
+                          const SizedBox(height: 32),
+                          authState.isLoading
+                              ? const Center(child: CircularProgressIndicator())
+                              : Row(
+                                  children: [
+                                    Expanded(
+                                      child: MyButton(
+                                        backgroundColor: const Color.fromARGB(
+                                            255, 2, 141, 255),
+                                        text: AppLocalizations.of(context)!
+                                            .tr('login'),
+                                        onPressed: () {
+                                          if (_formKey.currentState!
+                                              .validate()) {
+                                            ref
+                                                .read(authViewModelProvider
+                                                    .notifier)
+                                                .login(
+                                                  email: _emailController.text,
+                                                  password:
+                                                      _passwordController.text,
+                                                );
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey.shade400),
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
+                                      child: IconButton(
+                                          icon: const Icon(Icons.fingerprint),
+                                          onPressed: () {}),
+                                    ),
+                                  ],
+                                ),
+                          const SizedBox(height: 16),
+                          MyButton(
+                            backgroundColor:
+                                const Color.fromARGB(255, 2, 141, 255),
+                            text: AppLocalizations.of(context)!
+                                .tr('Create Account'),
+                            onPressed: () {},
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Flexible(
+                        child: Divider(
+                          color: Colors.grey,
+                          thickness: 0.5,
+                          indent: 60,
+                          endIndent: 5,
+                        ),
+                      ),
+                      Text(AppLocalizations.of(context)!.tr('or')),
+                      const Flexible(
+                        child: Divider(
+                          color: Colors.grey,
+                          thickness: 0.5,
+                          indent: 5,
+                          endIndent: 60,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade400),
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: const Image(
+                              height: 40,
+                              width: 40,
+                              image: AssetImage("assets/icon/google.png"),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade400),
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: const Image(
+                              height: 40,
+                              width: 40,
+                              image: AssetImage("assets/icon/facebook.png"),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade400),
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: const Image(
+                              height: 40,
+                              width: 40,
+                              image: AssetImage("assets/icon/tweeter.png"),
+                            ),
                           ),
                         ),
                       ],
                     ),
-
-                    /// Set Animaion after user click buttonLogin
-                    tap == 0
-                        ? InkWell(
-                            splashColor: Colors.yellow,
-                            onTap: () {
-                              setState(() {
-                                tap = 1;
-                              });
-                              LoginAnimation(
-                                animationController: sanimationController.view
-                                    as AnimationController,
-                              );
-                              _PlayAnimation();
-                            },
-                            child: const buttonBlackBottom(),
-                          )
-                        : LoginAnimation(
-                            animationController: sanimationController.view
-                                as AnimationController,
-                          )
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-///ButtonBlack class
-class buttonBlackBottom extends StatelessWidget {
-  const buttonBlackBottom({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(30.0),
-      child: Container(
-        height: 55.0,
-        width: 600.0,
-        alignment: FractionalOffset.center,
-        decoration: BoxDecoration(
-            boxShadow: const [
-              BoxShadow(color: Colors.black38, blurRadius: 15.0)
-            ],
-            borderRadius: BorderRadius.circular(30.0),
-            gradient: const LinearGradient(
-                colors: <Color>[Color(0xFF121940), Color(0xFF6E48AA)])),
-        child: Text(
-          AppLocalizations.of(context)!.tr('login'),
-          style: const TextStyle(
-              color: Colors.white,
-              letterSpacing: 0.2,
-              fontFamily: "Sans",
-              fontSize: 18.0,
-              fontWeight: FontWeight.w800),
-        ),
-      ),
-    );
+        ));
   }
 }

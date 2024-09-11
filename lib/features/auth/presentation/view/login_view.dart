@@ -71,11 +71,7 @@ class _LoginScreenState extends State<LoginScreen>
         backgroundColor: Colors.white,
         body: Container(
           /// Set Background image in layout (Click to open code)
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-            image: AssetImage("assets/img/LoginScreenbackground.png"),
-            fit: BoxFit.cover,
-          )),
+
           child: Container(
             /// Set gradient color in image (Click to open code)
             decoration: const BoxDecoration(

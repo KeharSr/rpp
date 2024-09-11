@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:rpp/app/theme/theme_data/theme_data.dart';
 import 'package:rpp/features/auth/presentation/view/login_view.dart';
 import 'package:rpp/features/language/easy_localization_delegate.dart';
 import 'package:rpp/features/language/easy_localization_provider.dart';
@@ -26,13 +27,11 @@ class App extends StatelessWidget {
       data: data,
       child: MaterialApp(
         title: "Treva Shop",
-        theme: ThemeData(
-            buttonTheme: const ButtonThemeData(buttonColor: Colors.white),
-            brightness: Brightness.light,
-            primaryColorLight: Colors.white,
-            primaryColor: Colors.white),
+        theme: KAppTheme.lightTheme,
+        themeMode: ThemeMode.system,
+        darkTheme: KAppTheme.darkTheme,
         debugShowCheckedModeBanner: false,
-        home: const LoginScreen(),
+        home: const LoginView(),
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

@@ -238,3 +238,6 @@ flutter:
     - assets/img/indonesia.png
     - assets/img/us.png
     - assets/img/logoApps.png
+    - assets/icon/google.png
+    - assets/icon/facebook.png
+    - assets/icon/tweeter.png

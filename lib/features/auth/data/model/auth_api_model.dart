@@ -11,6 +11,7 @@ class AuthApiModel extends Equatable {
   final String? avatarUrl;
   final String? displayName;
   final String? needUpdatePw;
+  final String? phone;
 
   const AuthApiModel(
       {required this.id,
@@ -21,7 +22,8 @@ class AuthApiModel extends Equatable {
       required this.term,
       required this.avatarUrl,
       required this.displayName,
-      required this.needUpdatePw});
+      required this.needUpdatePw,
+      required this.phone});
 
   // empty model
   const AuthApiModel.empty()
@@ -33,21 +35,22 @@ class AuthApiModel extends Equatable {
         term = '',
         avatarUrl = '',
         displayName = '',
+        phone = '',
         needUpdatePw = '';
 
   // from entity
   factory AuthApiModel.fromEntity(AuthEntity entity) {
     return AuthApiModel(
-      id: entity.id,
-      email: entity.email,
-      password: entity.password,
-      firstName: entity.firstName,
-      lastName: entity.lastName,
-      term: entity.term,
-      avatarUrl: entity.avatarUrl,
-      displayName: entity.displayName,
-      needUpdatePw: entity.needUpdatePw,
-    );
+        id: entity.id,
+        email: entity.email,
+        password: entity.password,
+        firstName: entity.firstName,
+        lastName: entity.lastName,
+        term: entity.term,
+        avatarUrl: entity.avatarUrl,
+        displayName: entity.displayName,
+        needUpdatePw: entity.needUpdatePw,
+        phone: entity.phone);
   }
 
   // to entity
@@ -62,6 +65,7 @@ class AuthApiModel extends Equatable {
       avatarUrl: avatarUrl,
       displayName: displayName,
       needUpdatePw: needUpdatePw,
+      phone: phone,
     );
   }
 
@@ -77,6 +81,7 @@ class AuthApiModel extends Equatable {
       avatarUrl: json['avatar_url'],
       displayName: json['display_name'],
       needUpdatePw: json['need_update_pw'],
+      phone: json['phone'],
     );
   }
 
@@ -92,6 +97,7 @@ class AuthApiModel extends Equatable {
       'avatar_url': avatarUrl,
       'display_name': displayName,
       'need_update_pw': needUpdatePw,
+      'phone': phone,
     };
   }
 

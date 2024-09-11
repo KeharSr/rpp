@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rpp/core/common/button.dart';
 import 'package:rpp/core/common/text_form_field.dart';
+import 'package:rpp/features/auth/presentation/view/register_view.dart';
 import 'package:rpp/features/auth/presentation/view_model/auth_view_model.dart';
 import 'package:rpp/features/language/easy_localization_delegate.dart';
 import 'package:rpp/features/language/easy_localization_provider.dart';
@@ -192,7 +193,14 @@ class _LoginViewState extends ConsumerState<LoginView> {
                                 const Color.fromARGB(255, 2, 141, 255),
                             text: AppLocalizations.of(context)!
                                 .tr('Create Account'),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const RegisterView(),
+                                ),
+                              );
+                            },
                           ),
                           const SizedBox(height: 10),
                         ],

@@ -29,10 +29,10 @@ class AuthDataSource {
         },
       );
 
-      if (response.data['status'] == 1) {
+      if (response.data['status'] == true) {
         return const Right(true);
       } else {
-        return Left(Failure(error: response.data['message']));
+        return Left(Failure(error: response.data['message'].toString()));
       }
     } on DioException catch (e) {
       return Left(Failure(error: e.error.toString()));

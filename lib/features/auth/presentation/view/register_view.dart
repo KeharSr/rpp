@@ -1,274 +1,235 @@
-// import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rpp/core/common/button.dart';
+import 'package:rpp/core/common/text_form_field.dart';
 
-// import 'package:flutter/material.dart';
-// import 'package:rpp/core/common/buttom_black_buttom.dart';
-// import 'package:rpp/core/common/text_form_field.dart';
-// import 'package:rpp/features/auth/presentation/view/login_view.dart';
-// import 'package:rpp/features/auth/presentation/widgets/login_animations.dart';
-// import 'package:rpp/features/language/easy_localization_delegate.dart';
-// import 'package:rpp/features/language/easy_localization_provider.dart';
+class RegisterView extends ConsumerStatefulWidget {
+  const RegisterView({super.key});
 
-// class Signup extends StatefulWidget {
-//   const Signup({super.key});
+  @override
+  ConsumerState<RegisterView> createState() => _RegisterViewState();
+}
 
-//   @override
-//   _SignupState createState() => _SignupState();
-// }
+class _RegisterViewState extends ConsumerState<RegisterView> {
+  bool _obscureText = true;
+  final _formKey = GlobalKey<FormState>();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _agreedToTerms = false;
 
-// class _SignupState extends State<Signup> with TickerProviderStateMixin {
-//   //Animation Declaration
-//   late AnimationController sanimationController;
-//   AnimationController? animationControllerScreen;
-//   Animation? animationScreen;
-//   var tap = 0;
-
-//   /// Set AnimationController to initState
-//   @override
-//   void initState() {
-//     sanimationController = AnimationController(
-//         vsync: this, duration: const Duration(milliseconds: 800))
-//       ..addStatusListener((statuss) {
-//         if (statuss == AnimationStatus.dismissed) {
-//           setState(() {
-//             tap = 0;
-//           });
-//         }
-//       });
-//     // TODO: implement initState
-//     super.initState();
-//   }
-
-//   /// Dispose animationController
-//   @override
-//   void dispose() {
-//     sanimationController.dispose();
-//     super.dispose();
-//   }
-
-//   /// Playanimation set forward reverse
-//   Future<Null> _PlayAnimation() async {
-//     try {
-//       await sanimationController.forward();
-//       await sanimationController.reverse();
-//     } on TickerCanceled {}
-//   }
-
-//   /// Component Widget layout UI
-//   @override
-//   Widget build(BuildContext context) {
-//     MediaQueryData mediaQueryData = MediaQuery.of(context);
-//     mediaQueryData.devicePixelRatio;
-//     mediaQueryData.size.height;
-//     mediaQueryData.size.width;
-
-//     var data = EasyLocalizationProvider.of(context)!.data;
-//     return EasyLocalizationProvider(
-//       data: data,
-//       child: Scaffold(
-//         body: Stack(
-//           children: <Widget>[
-//             Container(
-//               /// Set Background image in layout
-//               decoration: const BoxDecoration(
-//                   image: DecorationImage(
-//                 image: AssetImage("assets/img/backgroundgirl.png"),
-//                 fit: BoxFit.cover,
-//               )),
-//               child: Container(
-//                 /// Set gradient color in image
-//                 decoration: const BoxDecoration(
-//                   gradient: LinearGradient(
-//                     colors: [
-//                       Color.fromRGBO(0, 0, 0, 0.2),
-//                       Color.fromRGBO(0, 0, 0, 0.3)
-//                     ],
-//                     begin: FractionalOffset.topCenter,
-//                     end: FractionalOffset.bottomCenter,
-//                   ),
-//                 ),
-
-//                 /// Set component layout
-//                 child: ListView(
-//                   padding: const EdgeInsets.all(0.0),
-//                   children: <Widget>[
-//                     Stack(
-//                       alignment: AlignmentDirectional.bottomCenter,
-//                       children: <Widget>[
-//                         Column(
-//                           children: <Widget>[
-//                             Container(
-//                               alignment: AlignmentDirectional.topCenter,
-//                               child: Column(
-//                                 children: <Widget>[
-//                                   /// padding logo
-//                                   Padding(
-//                                       padding: EdgeInsets.only(
-//                                           top: mediaQueryData.padding.top +
-//                                               40.0)),
-//                                   Row(
-//                                     mainAxisAlignment: MainAxisAlignment.center,
-//                                     children: <Widget>[
-//                                       const Image(
-//                                         image:
-//                                             AssetImage("assets/img/Logo.png"),
-//                                         height: 70.0,
-//                                       ),
-//                                       const Padding(
-//                                           padding: EdgeInsets.symmetric(
-//                                               horizontal: 10.0)),
-
-//                                       /// Animation text treva shop accept from login layout
-//                                       Hero(
-//                                         tag: "Treva",
-//                                         child: Text(
-//                                           AppLocalizations.of(context)!
-//                                               .tr('title'),
-//                                           style: const TextStyle(
-//                                               fontWeight: FontWeight.w900,
-//                                               letterSpacing: 0.6,
-//                                               fontFamily: "Sans",
-//                                               color: Colors.white,
-//                                               fontSize: 20.0),
-//                                         ),
-//                                       ),
-//                                     ],
-//                                   ),
-//                                   const Padding(
-//                                       padding:
-//                                           EdgeInsets.symmetric(vertical: 70.0)),
-
-//                                   /// TextFromField Email
-//                                   TextFromField(
-//                                     icon: Icons.email,
-//                                     password: false,
-//                                     email: AppLocalizations.of(context)!
-//                                         .tr('firstName'),
-//                                     inputType: TextInputType.emailAddress,
-//                                   ),
-//                                   const Padding(
-//                                       padding:
-//                                           EdgeInsets.symmetric(vertical: 5.0)),
-
-//                                   TextFromField(
-//                                     icon: Icons.email,
-//                                     password: false,
-//                                     email: AppLocalizations.of(context)!
-//                                         .tr('lastName'),
-//                                     inputType: TextInputType.emailAddress,
-//                                   ),
-//                                   const Padding(
-//                                       padding:
-//                                           EdgeInsets.symmetric(vertical: 5.0)),
-
-//                                   TextFromField(
-//                                     icon: Icons.email,
-//                                     password: false,
-//                                     email: AppLocalizations.of(context)!
-//                                         .tr('email'),
-//                                     inputType: TextInputType.emailAddress,
-//                                   ),
-//                                   const Padding(
-//                                       padding:
-//                                           EdgeInsets.symmetric(vertical: 5.0)),
-
-//                                   TextFromField(
-//                                     icon: Icons.email,
-//                                     password: false,
-//                                     email: AppLocalizations.of(context)!
-//                                         .tr('phone'),
-//                                     inputType: TextInputType.emailAddress,
-//                                   ),
-//                                   const Padding(
-//                                       padding:
-//                                           EdgeInsets.symmetric(vertical: 5.0)),
-
-//                                   /// TextFromField Password
-//                                   TextFromField(
-//                                     icon: Icons.vpn_key,
-//                                     password: true,
-//                                     email: AppLocalizations.of(context)!
-//                                         .tr('password'),
-//                                     inputType: TextInputType.text,
-//                                   ),
-
-//                                   // check box for terms and conditions
-//                                   Row(
-//                                     children: <Widget>[
-//                                       Checkbox(
-//                                         value: false,
-//                                         onChanged: (bool? value) {},
-//                                       ),
-//                                       Text(
-//                                         AppLocalizations.of(context)!
-//                                             .tr('termsAndConditions'),
-//                                         style: const TextStyle(
-//                                             color: Colors.white,
-//                                             fontSize: 13.0,
-//                                             fontWeight: FontWeight.w600,
-//                                             fontFamily: "Sans"),
-//                                       ),
-//                                     ],
-//                                   ),
-
-//                                   /// Button Login
-//                                   Padding(
-//                                     padding: const EdgeInsets.only(top: 20.0),
-//                                     child: InkWell(
-//                                         onTap: () {
-//                                           Navigator.of(context).pushReplacement(
-//                                               MaterialPageRoute(
-//                                                   builder:
-//                                                       (BuildContext context) =>
-//                                                           const LoginScreen()));
-//                                         },
-//                                         child: Text(
-//                                           AppLocalizations.of(context)!
-//                                               .tr('notHaveLogin'),
-//                                           style: const TextStyle(
-//                                               color: Colors.white,
-//                                               fontSize: 13.0,
-//                                               fontWeight: FontWeight.w600,
-//                                               fontFamily: "Sans"),
-//                                         )),
-//                                   ),
-//                                   Padding(
-//                                     padding: EdgeInsets.only(
-//                                         top: mediaQueryData.padding.top + 225.0,
-//                                         bottom: 0.0),
-//                                   )
-//                                 ],
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-
-//                         /// Set Animaion after user click buttonLogin
-//                         tap == 0
-//                             ? InkWell(
-//                                 splashColor: Colors.yellow,
-//                                 onTap: () {
-//                                   setState(() {
-//                                     tap = 1;
-//                                   });
-//                                   _PlayAnimation();
-//                                 },
-//                                 child: const ButtonBlackBottom(),
-//                               )
-//                             : LoginAnimation(
-//                                 animationController: sanimationController.view
-//                                     as AnimationController,
-//                               )
-//                       ],
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// ///ButtonBlack class
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Image(
+                    height: 100,
+                    image: AssetImage("assets/images/applogo.png"),
+                  ),
+                  const Text(
+                    "Let's Create Your Account",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Flexible(
+                              child: MyTextFormField(
+                                controller: _firstNameController,
+                                labelText: "First Name",
+                                prefixIcon: Icons.person,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your first name';
+                                  }
+                                  if (value.length < 3) {
+                                    return 'Please enter a valid first name';
+                                  }
+                                  if (RegExp(r'^\d+$').hasMatch(value)) {
+                                    return 'Please enter a valid first name';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: MyTextFormField(
+                                controller: _lastNameController,
+                                labelText: "Last Name",
+                                prefixIcon: Icons.person,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your last name';
+                                  }
+                                  if (value.length < 3) {
+                                    return 'Please enter a valid last name';
+                                  }
+                                  if (RegExp(r'^\d+$').hasMatch(value)) {
+                                    return 'Please enter a valid last name';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        MyTextFormField(
+                          controller: _emailController,
+                          labelText: "Email",
+                          prefixIcon: Icons.email,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your email';
+                            }
+                            if (!RegExp(r'^[^@]+@[^@]+\.[^@]+$')
+                                .hasMatch(value)) {
+                              return 'Please enter a valid email';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        MyTextFormField(
+                          controller: _phoneNumberController,
+                          labelText: "Phone Number",
+                          prefixIcon: Icons.phone_android,
+                          keyboardType: TextInputType.number,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your phone number';
+                            }
+                            if (!RegExp(r'^\d{10}$').hasMatch(value)) {
+                              return 'Please enter a valid phone number';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        MyTextFormField(
+                          controller: _passwordController,
+                          labelText: "Password",
+                          prefixIcon: Icons.password_sharp,
+                          obscureText: _obscureText,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your password';
+                            }
+                            if (value.length < 5) {
+                              return 'Please enter a valid password';
+                            }
+                            return null;
+                          },
+                          suffixIcon: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
+                            child: Icon(
+                              _obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Checkbox(
+                              value: _agreedToTerms,
+                              onChanged: (value) {
+                                setState(() {
+                                  _agreedToTerms = value!;
+                                });
+                              },
+                            ),
+                            const Flexible(
+                              child: Text.rich(
+                                TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "I agree to the ",
+                                      style: TextStyle(color: Colors.blue),
+                                    ),
+                                    TextSpan(
+                                      text: "Privacy Policy ",
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 3, 139, 251),
+                                        decoration: TextDecoration.underline,
+                                        decorationColor:
+                                            Color.fromARGB(255, 3, 139, 251),
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: "and ",
+                                      style: TextStyle(color: Colors.blue),
+                                    ),
+                                    TextSpan(
+                                      text: "Terms of use ",
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 3, 139, 251),
+                                        decoration: TextDecoration.underline,
+                                        decorationColor:
+                                            Color.fromARGB(255, 3, 139, 251),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 32),
+                        MyButton(
+                          backgroundColor:
+                              const Color.fromARGB(255, 1, 141, 255),
+                          text: 'Create Account',
+                          onPressed: () {},
+                        ),
+                        const SizedBox(height: 20),
+                        Row(
+                          children: [
+                            const Text("Already have an account? "),
+                            TextButton(
+                              onPressed: () {},
+                              child: const Text(
+                                "Login",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 3, 139, 251),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

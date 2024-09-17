@@ -22,18 +22,36 @@ class MyTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      obscureText: obscureText,
-      keyboardType: keyboardType,
-      validator: validator,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+    return Container(
+      child: TextFormField(
+        controller: controller,
+        obscureText: obscureText,
+        keyboardType: keyboardType,
+        validator: validator,
+        decoration: InputDecoration(
+          labelText: labelText,
+          prefixIcon: Icon(prefixIcon, color: Colors.white),
+          suffixIcon: suffixIcon,
+          suffixIconColor: Colors.white,
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white), // White border
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+                color: Colors.blue,
+                width: 2.0), // Thicker white border when focused
+          ),
+          errorBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+                color: Colors.red, width: 2.0), // Red border on error
+          ),
+          focusedErrorBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+                color: Colors.red,
+                width: 2.0), // Red border when focused and error
+          ),
         ),
-        labelText: labelText,
-        prefixIcon: Icon(prefixIcon),
-        suffixIcon: suffixIcon,
+        // Text color inside the field
       ),
     );
   }

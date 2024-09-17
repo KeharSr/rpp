@@ -104,7 +104,6 @@ flutter:
     - assets/img/handshake.png
     - assets/img/paypal.png
     - assets/img/icon_facebook.png
-    - assets/img/Logo.png
     - assets/img/Rectangle.png
     - assets/img/girl.png
     - assets/img/loginScreenbackground.png
@@ -245,3 +244,5 @@ flutter:
     - assets/icon/google.png
     - assets/icon/facebook.png
     - assets/icon/tweeter.png
+    - assets/img/app_logo.png
+    - assets/img/app_background.png

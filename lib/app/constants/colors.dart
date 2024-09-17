@@ -14,6 +14,12 @@ class TColors {
     end: Alignment.bottomRight,
   );
 
+  static const LinearGradient appPrimaryColor = LinearGradient(
+    colors: [ Color(0xFFF8d448),Color(0xFFFF7544),],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
   // Text Colors
   static const Color textPrimary = Color(0xFF333333);
   static const Color textSecondary = Color(0xFF6C7570);
@@ -54,4 +60,6 @@ class TColors {
 
   static const Color creamwhite = Color(0xffF5F5F5);
   static const Color red = Color(0xffff660e);
+
+  
 }

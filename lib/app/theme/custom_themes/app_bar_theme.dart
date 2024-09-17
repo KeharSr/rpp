@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:rpp/app/constants/colors.dart';
 import 'package:rpp/app/constants/sizes.dart';
-
 
 class KAppBarTheme {
   KAppBarTheme._();
@@ -11,7 +9,7 @@ class KAppBarTheme {
     elevation: 0,
     centerTitle: false,
     scrolledUnderElevation: 0,
-    backgroundColor: Colors.transparent,
+    backgroundColor: Color(0xFFF8d448),
     surfaceTintColor: Colors.transparent,
     iconTheme: IconThemeData(color: TColors.black, size: TSizes.iconMd),
     actionsIconTheme: IconThemeData(color: TColors.black, size: TSizes.iconMd),

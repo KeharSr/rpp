@@ -19,9 +19,12 @@ class MyButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: 50,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-         
+      child: TextButton(
+        style: TextButton.styleFrom(
+          backgroundColor: backgroundColor ?? Colors.blue,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(0),
+          ),
         ),
         onPressed: onPressed,
         child: Text(

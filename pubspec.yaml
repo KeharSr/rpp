@@ -48,10 +48,14 @@ dependencies:
   pretty_dio_logger: ^1.4.0
   dartz: ^0.10.1
   iconsax: ^0.0.8
-  
+
   json_annotation: ^4.9.0
   json_serializable: ^6.8.0
   flutter_html: ^3.0.0-beta.2
+  smooth_page_indicator: ^1.2.0+3
+  country_state_city: ^0.1.6
+  flutter_country_state: ^1.0.0
+  csc_picker: ^0.2.7
 
 dev_dependencies:
   flutter_test:
@@ -253,3 +257,4 @@ flutter:
     - assets/icon/tweeter.png
     - assets/img/app_logo.png
     - assets/img/app_background.png
+    - assets/img/onboarding1.JPG

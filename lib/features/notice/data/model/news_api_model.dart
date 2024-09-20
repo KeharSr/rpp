@@ -14,12 +14,13 @@ class NewsApiModel extends Equatable {
   final String? slug; // Make nullable
   final String? title; // Make nullable
   final String? content; // Make nullable
-  final String? imageUrl; // Make nullable
-  final String? categoryName; // Make nullable
-  final String? createdAt; // Make nullable
-  final String? authorName; // Make nullable
-  final String? authorAvatarUrl; // Make nullable
-  final String? url; // Make nullable
+  final String? imageUrl;
+  final String? categoryName;
+  final String? createdAt;
+  final String? authorName;
+  final String? authorAvatarUrl;
+  final String? url;
+  final String? imageId;
 
   const NewsApiModel({
     required this.id,
@@ -32,19 +33,21 @@ class NewsApiModel extends Equatable {
     this.authorName,
     this.authorAvatarUrl,
     this.url,
+    this.imageId,
   });
 
   const NewsApiModel.empty()
       : id = 0,
-        slug = '',
-        title = '',
-        content = '',
-        imageUrl = '',
-        categoryName = '',
-        createdAt = '',
-        authorName = '',
-        authorAvatarUrl = '',
-        url = '';
+        slug = null,
+        title = null,
+        content = null,
+        imageUrl = null,
+        categoryName = null,
+        createdAt = null,
+        authorName = null,
+        authorAvatarUrl = null,
+        url = null,
+        imageId = null;
 
   // Convert API object to Entity object
   factory NewsApiModel.fromJson(Map<String, dynamic> json) =>
@@ -55,15 +58,16 @@ class NewsApiModel extends Equatable {
   NewsEntity toEntity() {
     return NewsEntity(
       id: id,
-      slug: slug ?? '', // Provide default value if null
-      title: title ?? '', // Provide default value if null
-      content: content ?? '', // Provide default value if null
-      imageUrl: imageUrl ?? '', // Provide default value if null
-      categoryName: categoryName ?? '', // Provide default value if null
-      createdAt: createdAt ?? '', // Provide default value if null
-      authorName: authorName ?? '', // Provide default value if null
-      authorAvatarUrl: authorAvatarUrl ?? '', // Provide default value if null
-      url: url ?? '', // Provide default value if null
+      slug: slug ?? '',
+      title: title ?? '',
+      content: content ?? '',
+      imageUrl: imageUrl ?? '',
+      categoryName: categoryName ?? '',
+      createdAt: createdAt ?? '',
+      authorName: authorName ?? '',
+      authorAvatarUrl: authorAvatarUrl ?? '',
+      url: url ?? '',
+      imageId: imageId ?? '',
     );
   }
 
@@ -80,6 +84,7 @@ class NewsApiModel extends Equatable {
       authorName: entity.authorName,
       authorAvatarUrl: entity.authorAvatarUrl,
       url: entity.url,
+      imageId: entity.imageId,
     );
   }
 
@@ -104,5 +109,6 @@ class NewsApiModel extends Equatable {
         authorName,
         authorAvatarUrl,
         url,
+        imageId,
       ];
 }

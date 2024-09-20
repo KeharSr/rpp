@@ -3,16 +3,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rpp/core/common/my_snackbar.dart';
 import 'package:rpp/features/auth/domain/entity/auth_entity.dart';
 import 'package:rpp/features/auth/domain/usecase/auth_usecase.dart';
+import 'package:rpp/features/auth/presentation/navigator/auth_navigator.dart';
 import 'package:rpp/features/auth/presentation/state/auth_state.dart';
 
 final authViewModelProvider = StateNotifierProvider<AuthViewModel, AuthState>(
-  (ref) => AuthViewModel(ref.read(authUsecaseProvider)),
+  (ref) => AuthViewModel(
+      ref.read(authUsecaseProvider), ref.read(loginViewNavigatorProvider)),
 );
 
 class AuthViewModel extends StateNotifier<AuthState> {
-  AuthViewModel(this.authUsecase) : super(AuthState.initial());
+  AuthViewModel(this.authUsecase, this.navigator) : super(AuthState.initial());
 
   final AuthUsecase authUsecase;
+  final LoginViewNavigator navigator;
 
   Future<void> login({required String email, required String password}) async {
     state = state.copyWith(isLoading: true);
@@ -26,9 +29,11 @@ class AuthViewModel extends StateNotifier<AuthState> {
       state = state.copyWith(isLoading: false, isLoginSuccess: true);
       showMySnackBar(message: 'Login Successful', color: Colors.green);
     });
+    openHomeView();
   }
 
-  Future<void> register({required AuthEntity entity,required bool term}) async {
+  Future<void> register(
+      {required AuthEntity entity, required bool term}) async {
     state = state.copyWith(isLoading: true);
 
     final result = await authUsecase.register(entity: entity, term: term);
@@ -41,4 +46,12 @@ class AuthViewModel extends StateNotifier<AuthState> {
       showMySnackBar(message: 'Register Successful', color: Colors.green);
     });
   }
+
+  
+
+  void openHomeView() {
+    navigator.openHomeView();
+  }
+
+
 }

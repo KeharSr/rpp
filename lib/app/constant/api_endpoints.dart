@@ -10,5 +10,7 @@ class ApiEndpoints {
 
   static const String login = "auth/login";
   static const String register = "auth/register";
-  static const String news = "news";
+  static const String getMe = "auth/me";
+  static const String updateMe = "auth/me";
+  static const String news = "news?lang=en";
 }

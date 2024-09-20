@@ -5,6 +5,7 @@ class NewsEntity extends Equatable {
   final String slug;
   final String title;
   final String content;
+  final String imageId;
   final String imageUrl;
   final String categoryName;
   final String createdAt;
@@ -23,6 +24,7 @@ class NewsEntity extends Equatable {
     required this.authorName,
     required this.authorAvatarUrl,
     required this.url,
+    required this.imageId,
   });
 
   @override
@@ -37,5 +39,6 @@ class NewsEntity extends Equatable {
         authorName,
         authorAvatarUrl,
         url,
+        imageId,
       ];
 }

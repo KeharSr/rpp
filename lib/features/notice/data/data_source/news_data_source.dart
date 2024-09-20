@@ -26,17 +26,14 @@ class NewsDataSource {
       print('Response data: ${response.data}');
 
       if (response.statusCode == 200 && response.data != null) {
-        // Parse the response using NewsResponse DTO
         final newsDto = NewsResponse.fromJson(response.data);
 
-        // If the data list is not null, convert to entity list, else return an empty list
         if (newsDto.data != null) {
           return Right(newsApiModel.toEntityList(newsDto.data!));
         } else {
-          return const Right([]); // Return an empty list if data is null
+          return const Right([]);
         }
       } else {
-        // Handle unsuccessful responses
         return Left(
           Failure(
             error: response.data['message'] ?? 'Unknown error',

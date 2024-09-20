@@ -26,4 +26,16 @@ class AuthRemoteRepository implements IAuthRepository {
       {required AuthEntity entity, required bool term}) {
     return authDataSource.register(entity: entity, term: term);
   }
+
+  // get me
+  @override
+  Future<Either<Failure, AuthEntity>> getMe() {
+    return authDataSource.getMe();
+  }
+
+  // update Me
+  @override
+  Future<Either<Failure, bool>> updateMe(AuthEntity user) {
+    return authDataSource.updateMe(user);
+  }
 }

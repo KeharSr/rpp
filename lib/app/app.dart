@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:rpp/app/navigator_key/navigator_key.dart';
 import 'package:rpp/app/theme/theme_data/theme_data.dart';
-import 'package:rpp/features/home/presentation/view/main_view.dart';
+import 'package:rpp/features/auth/presentation/view/login_view.dart';
 import 'package:rpp/features/language/easy_localization_delegate.dart';
 import 'package:rpp/features/language/easy_localization_provider.dart';
 
@@ -33,7 +33,7 @@ class App extends StatelessWidget {
         darkTheme: KAppTheme.darkTheme,
         debugShowCheckedModeBanner: false,
         navigatorKey: AppNavigator.navigatorKey,
-        home: const MainView(),
+        home: const LoginView(),
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

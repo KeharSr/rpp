@@ -22,4 +22,12 @@ class AuthUsecase {
       {required AuthEntity entity, required bool term}) {
     return authRepository.register(entity: entity, term: term);
   }
+
+  Future<Either<Failure, AuthEntity>> getMe() {
+    return authRepository.getMe();
+  }
+
+  Future<Either<Failure, bool>> updateMe(AuthEntity user) {
+    return authRepository.updateMe(user);
+  }
 }

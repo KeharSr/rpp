@@ -10,19 +10,33 @@ class AuthEntity extends Equatable {
   final String? term;
   final String? avatarUrl;
   final String? displayName;
-  final String? needUpdatePw;
+  final int? needUpdatePw;
+  final String? address;
+  final String? birthday;
+  final String? city;
+  final String? state;
+  final String? country;
+  final String? zipCode;
 
-  const AuthEntity(
-      {this.id,
-      required this.email,
-      required this.password,
-      required this.firstName,
-      required this.lastName,
-      required this.term,
-      this.avatarUrl,
-      this.displayName,
-      required this.phone,
-      this.needUpdatePw});
+  const AuthEntity({
+    this.id,
+    required this.email,
+    this.password,
+    required this.firstName,
+    required this.lastName,
+    this.term,
+    this.avatarUrl,
+    this.displayName,
+    required this.phone,
+    this.address,
+    this.needUpdatePw,
+    this.birthday,
+    this.city,
+    this.state,
+    this.country,
+    this.zipCode,
+    // Default value
+  });
 
   @override
   List<Object?> get props => [
@@ -36,5 +50,11 @@ class AuthEntity extends Equatable {
         displayName,
         needUpdatePw,
         phone,
+        address,
+        birthday,
+        city,
+        state,
+        country,
+        zipCode,
       ];
 }

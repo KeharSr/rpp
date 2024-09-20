@@ -51,12 +51,12 @@ class NewsView extends ConsumerWidget {
                             return Column(
                               children: [
                                 _buildListTile(
-                                  context: context,
-                                  title: entity.title,
-                                  description: entity.content ?? '',
-                                  // imageUrl: entity.imageUrl ?? ''
-                                  // Handle null imageUrl
-                                ),
+                                    context: context,
+                                    title: entity.title,
+                                    description: entity.content ?? '',
+                                    imageUrl: entity.imageUrl ?? ''
+                                    // Handle null imageUrl
+                                    ),
                                 const SizedBox(height: 10),
                                 Divider(
                                   indent: 16,
@@ -80,7 +80,7 @@ class NewsView extends ConsumerWidget {
     required BuildContext context,
     required String title,
     required String description,
-    // String imageUrl,
+    required String imageUrl,
   }) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,21 +110,21 @@ class NewsView extends ConsumerWidget {
           ),
         ),
         const SizedBox(width: 16),
-        // ClipRRect(
-        //   borderRadius: BorderRadius.circular(12.0),
-        //   child: Container(
-        //     width: 120,
-        //     height: 80,
-        //     color: Colors.grey[300],
-        //     child: imageUrl.isNotEmpty
-        //         ? Image.network(
-        //             imageUrl,
-        //             fit: BoxFit.cover,
-        //           )
-        //         : const Icon(
-        //             Icons.image_not_supported), // Placeholder for missing image
-        //   ),
-        // ),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(12.0),
+          child: Container(
+            width: 120,
+            height: 80,
+            color: Colors.grey[300],
+            child: imageUrl.isNotEmpty
+                ? Image.network(
+                    imageUrl,
+                    fit: BoxFit.cover,
+                  )
+                : const Icon(
+                    Icons.image_not_supported), // Placeholder for missing image
+          ),
+        ),
       ],
     );
   }

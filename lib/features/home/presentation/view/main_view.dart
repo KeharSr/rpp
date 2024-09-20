@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:rpp/features/home/presentation/view/home_view.dart';
 import 'package:rpp/features/notice/presentation/view/notice_view.dart';
-import 'package:rpp/features/others/presentation/others_view.dart';
+import 'package:rpp/features/profile/presentation/view/profile_view.dart';
 import 'package:rpp/features/program/presentation/view/program_view.dart';
 
 class MainView extends ConsumerStatefulWidget {
@@ -19,7 +19,7 @@ class _MainViewState extends ConsumerState<MainView> {
     const HomeView(),
     const NoticeView(),
     const ProgramView(),
-    const OthersView(),
+    const ProfileView(),
   ];
 
   @override

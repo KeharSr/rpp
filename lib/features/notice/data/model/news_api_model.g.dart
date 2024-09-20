@@ -8,15 +8,16 @@ part of 'news_api_model.dart';
 
 NewsApiModel _$NewsApiModelFromJson(Map<String, dynamic> json) => NewsApiModel(
       id: (json['id'] as num).toInt(),
-      slug: json['slug'] as String,
-      title: json['title'] as String,
-      content: json['content'] as String,
-      imageUrl: json['imageUrl'] as String,
-      categoryName: json['categoryName'] as String,
-      createdAt: json['createdAt'] as String,
-      authorName: json['authorName'] as String,
-      authorAvatarUrl: json['authorAvatarUrl'] as String,
-      url: json['url'] as String,
+      slug: json['slug'] as String?,
+      title: json['title'] as String?,
+      content: json['content'] as String?,
+      imageUrl: json['imageUrl'] as String?,
+      categoryName: json['categoryName'] as String?,
+      createdAt: json['createdAt'] as String?,
+      authorName: json['authorName'] as String?,
+      authorAvatarUrl: json['authorAvatarUrl'] as String?,
+      url: json['url'] as String?,
+      imageId: json['imageId'] as String?,
     );
 
 Map<String, dynamic> _$NewsApiModelToJson(NewsApiModel instance) =>
@@ -31,4 +32,5 @@ Map<String, dynamic> _$NewsApiModelToJson(NewsApiModel instance) =>
       'authorName': instance.authorName,
       'authorAvatarUrl': instance.authorAvatarUrl,
       'url': instance.url,
+      'imageId': instance.imageId,
     };

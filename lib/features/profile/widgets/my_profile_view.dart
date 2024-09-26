@@ -89,6 +89,13 @@ class ProfileDetails extends StatelessWidget {
           onTap: () {},
         ),
         ListTile(
+          leading: const Icon(Iconsax.language_circle, color: TColors.primary),
+          title: const Text('Language',
+              style: TextStyle(color: TColors.textPrimary)),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () {},
+        ),
+        ListTile(
           leading: const Icon(Iconsax.security, color: TColors.primary),
           title: const Text('Safe Mode',
               style: TextStyle(color: TColors.textPrimary)),

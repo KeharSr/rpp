@@ -59,4 +59,42 @@ class NewsDataSource {
       );
     }
   }
+
+  // Add a method to get news by id
+  Future<Either<Failure, NewsEntity>> getNewsById(int id) async {
+    try {
+      final response = await dio.get('${ApiEndpoints.news}/$id');
+
+      print('Response status code: ${response.statusCode}');
+      print('Response data: ${response.data}');
+
+      if (response.statusCode == 200) {
+        final news = NewsApiModel.fromJson(response.data['data']);
+        return Right(news.toEntity());
+      } else {
+        return Left(
+          Failure(
+            error: response.data['message'] ?? 'Unknown error',
+            statusCode: response.statusCode.toString(),
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      // Handle Dio-specific errors
+      print('DioException: ${e.message}');
+      return Left(
+        Failure(
+          error: e.message.toString(),
+        ),
+      );
+    } catch (e) {
+      // Catch any other exceptions
+      print('Exception: ${e.toString()}');
+      return Left(
+        Failure(
+          error: e.toString(),
+        ),
+      );
+    }
+  }
 }

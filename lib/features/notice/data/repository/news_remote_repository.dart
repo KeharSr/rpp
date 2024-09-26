@@ -18,4 +18,10 @@ class NewsRemoteRepository implements INewsRepository {
   Future<Either<Failure, List<NewsEntity>>> getNews() {
     return newsDataSource.getNews();
   }
+
+  // Get news by id
+  @override
+  Future<Either<Failure, NewsEntity>> getNewsById(int id) {
+    return newsDataSource.getNewsById(id);
+  }
 }

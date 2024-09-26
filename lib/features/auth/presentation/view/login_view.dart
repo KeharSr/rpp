@@ -18,9 +18,9 @@ class _LoginViewState extends ConsumerState<LoginView> {
   bool _obscureText = true;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController =
-      TextEditingController(text: "keharojha56@gmail.com");
+      TextEditingController(text: "hari@gmail.com");
   final TextEditingController _passwordController =
-      TextEditingController(text: "password");
+      TextEditingController(text: "password@");
   bool _rememberMe = false;
 
   @override

@@ -11,7 +11,7 @@ NewsApiModel _$NewsApiModelFromJson(Map<String, dynamic> json) => NewsApiModel(
       slug: json['slug'] as String?,
       title: json['title'] as String?,
       content: json['content'] as String?,
-      imageUrl: json['imageUrl'] as String?,
+      imageUrl: json['image_url'] as String?,
       categoryName: json['categoryName'] as String?,
       createdAt: json['createdAt'] as String?,
       authorName: json['authorName'] as String?,

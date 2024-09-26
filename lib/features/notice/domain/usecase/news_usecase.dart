@@ -16,4 +16,9 @@ class NewsUseCase {
   Future<Either<Failure, List<NewsEntity>>> getNews() async {
     return await newsRepository.getNews();
   }
+
+  // Get news by id
+  Future<Either<Failure, NewsEntity>> getNewsById(int id) async {
+    return await newsRepository.getNewsById(id);
+  }
 }

@@ -10,6 +10,7 @@ final newsRepositoryProvider =
 abstract class INewsRepository {
   Future<Either<Failure, List<NewsEntity>>> getNews();
   Future<Either<Failure, NewsEntity>> getNewsById(int id);
+  Future<Either<Failure, List<NewsEntity>>> getNewsByCategory(int categoryId);
 }
 
 final newsRemoteRepositoryProvider =
@@ -28,7 +29,14 @@ class NewsRemoteRepository implements INewsRepository {
   }
 
   // Get news by id
+  @override
   Future<Either<Failure, NewsEntity>> getNewsById(int id) {
     return newsDataSource.getNewsById(id);
+  }
+
+  // Add a method to get news by category
+  @override
+  Future<Either<Failure, List<NewsEntity>>> getNewsByCategory(int categoryId) {
+    return newsDataSource.getNewsByCategory(categoryId);
   }
 }

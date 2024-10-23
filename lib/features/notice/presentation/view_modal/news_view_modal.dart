@@ -36,4 +36,29 @@ class NewsViewModel extends StateNotifier<NewsState> {
       },
     );
   }
+
+  // Add a method to get news by category
+  Future<void> fetchNewsByCategory(int categoryId) async {
+    state = state.copyWith(isLoading: true);
+
+    final result = await newsUsecase.getNewsByCategory(categoryId);
+
+    result.fold(
+      (failure) {
+        state = state.copyWith(
+          isLoading: false,
+          error: failure.error,
+          isLoadSuccess: false,
+        );
+        showMySnackBar(message: failure.error, color: Colors.red);
+      },
+      (newsList) {
+        state = state.copyWith(
+          isLoading: false,
+          newsList: newsList,
+          isLoadSuccess: true,
+        );
+      },
+    );
+  }
 }

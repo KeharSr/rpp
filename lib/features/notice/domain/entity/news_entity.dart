@@ -6,25 +6,27 @@ class NewsEntity extends Equatable {
   final String title;
   final String content;
   final String imageId;
-  final String imageUrl;
-  final String categoryName;
+  final String image_url;
+  final String category_name;
   final String createdAt;
   final String authorName;
   final String authorAvatarUrl;
   final String url;
+  final int category_id;
 
   const NewsEntity({
     required this.id,
     required this.slug,
     required this.title,
     required this.content,
-    required this.imageUrl,
-    required this.categoryName,
+    required this.image_url,
+    required this.category_name,
     required this.createdAt,
     required this.authorName,
     required this.authorAvatarUrl,
     required this.url,
     required this.imageId,
+    required this.category_id,
   });
 
   @override
@@ -33,12 +35,13 @@ class NewsEntity extends Equatable {
         slug,
         title,
         content,
-        imageUrl,
-        categoryName,
+        image_url,
+        category_name,
         createdAt,
         authorName,
         authorAvatarUrl,
         url,
         imageId,
+        category_id,
       ];
 }

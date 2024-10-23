@@ -14,26 +14,28 @@ class NewsApiModel extends Equatable {
   final String? slug; // Make nullable
   final String? title; // Make nullable
   final String? content; // Make nullable
-  final String? imageUrl;
-  final String? categoryName;
+  final String? image_url;
+  final String? category_name;
   final String? createdAt;
   final String? authorName;
   final String? authorAvatarUrl;
   final String? url;
   final String? imageId;
+  final int? category_id;
 
   const NewsApiModel({
     required this.id,
     this.slug,
     this.title,
     this.content,
-    this.imageUrl,
-    this.categoryName,
+    this.image_url,
+    this.category_name,
     this.createdAt,
     this.authorName,
     this.authorAvatarUrl,
     this.url,
     this.imageId,
+    this.category_id,
   });
 
   const NewsApiModel.empty()
@@ -41,13 +43,15 @@ class NewsApiModel extends Equatable {
         slug = null,
         title = null,
         content = null,
-        imageUrl = null,
-        categoryName = null,
+        image_url = null,
+        category_name = null,
         createdAt = null,
         authorName = null,
         authorAvatarUrl = null,
         url = null,
+        category_id = 0,
         imageId = null;
+
 
   // Convert API object to Entity object
   factory NewsApiModel.fromJson(Map<String, dynamic> json) =>
@@ -61,13 +65,14 @@ class NewsApiModel extends Equatable {
       slug: slug ?? '',
       title: title ?? '',
       content: content ?? '',
-      imageUrl: imageUrl ?? '',
-      categoryName: categoryName ?? '',
+      image_url: image_url ?? '',
+      category_name: category_name ?? '',
       createdAt: createdAt ?? '',
       authorName: authorName ?? '',
       authorAvatarUrl: authorAvatarUrl ?? '',
       url: url ?? '',
       imageId: imageId ?? '',
+      category_id: category_id ?? 0,
     );
   }
 
@@ -78,13 +83,14 @@ class NewsApiModel extends Equatable {
       slug: entity.slug,
       title: entity.title,
       content: entity.content,
-      imageUrl: entity.imageUrl,
-      categoryName: entity.categoryName,
+      image_url: entity.image_url,
+      category_name: entity.category_name,
       createdAt: entity.createdAt,
       authorName: entity.authorName,
       authorAvatarUrl: entity.authorAvatarUrl,
       url: entity.url,
       imageId: entity.imageId,
+      category_id: entity.category_id,
     );
   }
 
@@ -103,12 +109,13 @@ class NewsApiModel extends Equatable {
         slug,
         title,
         content,
-        imageUrl,
-        categoryName,
+        image_url,
+        category_name,
         createdAt,
         authorName,
         authorAvatarUrl,
         url,
         imageId,
+        category_id,
       ];
 }

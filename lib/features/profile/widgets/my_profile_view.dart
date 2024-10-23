@@ -23,9 +23,13 @@ class ProfileDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Title(
+            color: Colors.black,
+            child: Text('Account',
+                style: Theme.of(context).textTheme.headlineSmall)),
         ListTile(
-          leading: const Icon(Iconsax.home, color: TColors.primary),
-          title: const Text('My Addresses',
+          leading: const Icon(Iconsax.money3, color: TColors.primary),
+          title: const Text('Donation',
               style: TextStyle(color: TColors.textPrimary)),
           trailing: const Icon(Icons.chevron_right),
           onTap: () {},

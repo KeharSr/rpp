@@ -84,7 +84,7 @@ class SingleNewsView extends ConsumerWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.network(
-                  '${news.imageUrl}', // Make sure to use a valid image URL
+                  news.image_url, // Make sure to use a valid image URL
                   height: 250,
                   width: double.infinity,
                   fit: BoxFit.cover,

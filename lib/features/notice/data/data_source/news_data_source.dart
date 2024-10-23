@@ -97,4 +97,54 @@ class NewsDataSource {
       );
     }
   }
+
+  // get news by category
+  Future<Either<Failure, List<NewsEntity>>> getNewsByCategory(int category,
+      {String lang = 'np'}) async {
+    try {
+      final response = await dio.get(
+        ApiEndpoints.news, // Base URL
+        queryParameters: {
+          'cat_id': category, // Use category as cat_id
+          'lang': lang // Default language is 'np'
+        },
+      );
+
+      print('Response status code: ${response.statusCode}');
+      print('Response data: ${response.data}');
+
+      if (response.statusCode == 200 && response.data != null) {
+        final newsDto = NewsResponse.fromJson(response.data);
+
+        if (newsDto.data != null) {
+          return Right(newsApiModel.toEntityList(newsDto.data!));
+        } else {
+          return const Right([]); // Return empty list if no data
+        }
+      } else {
+        return Left(
+          Failure(
+            error: response.data['message'] ?? 'Unknown error',
+            statusCode: response.statusCode.toString(),
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      // Handle Dio-specific errors
+      print('DioException: ${e.message}');
+      return Left(
+        Failure(
+          error: e.message.toString(),
+        ),
+      );
+    } catch (e) {
+      // Catch any other exceptions
+      print('Exception: ${e.toString()}');
+      return Left(
+        Failure(
+          error: e.toString(),
+        ),
+      );
+    }
+  }
 }

@@ -1,4 +1,4 @@
-package com.rpp.rpp.rpp
+package com.example.rpp
 
 import io.flutter.embedding.android.FlutterActivity
 

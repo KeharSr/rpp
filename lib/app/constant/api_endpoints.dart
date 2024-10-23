@@ -13,6 +13,8 @@ class ApiEndpoints {
   static const String getMe = "auth/me";
   static const String updateMe = "auth/me";
   static const String news = "news?lang=en";
+  //get news by category
+  static const String newsByCategory = "news/category/";
   static const String newsImageUrl = "https://rpp.sarbatra.com/uploads/";
   static const String authorAvatarUrl = "https://rpp.sarbatra.com/images/";
 }
